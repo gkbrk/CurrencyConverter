@@ -1,6 +1,9 @@
 #Currency Converter#
 This is a simple currency calculator written in C. It updates its database from the European Central Bank's API.
 
+##How To Use##
+![Usage GIF](https://i.imgur.com/AsF86cz.gif)
+
 ##Dependencies##
 Currency Converter only needs `libxml2`.
 
