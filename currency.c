@@ -16,8 +16,13 @@ int main(int argc, char *argv[]){
         }
         free(currencies);
     }else if (argc > 2 && strcmp(argv[1], "get") == 0){
-        printf("1 EUR --> %.4f %s\n", ecbGetEurRate(argv[2]), argv[2]);
-        printf("1 %s --> %.4f EUR\n", argv[2], 1/ecbGetEurRate(argv[2]));
+        double EURRate = ecbGetEurRate(argv[2]);
+        if (EURRate != -1){
+            printf("1 EUR --> %.4f %s\n", ecbGetEurRate(argv[2]), argv[2]);
+            printf("1 %s --> %.4f EUR\n", argv[2], 1/ecbGetEurRate(argv[2]));
+        }else{
+            printf("Currency not found: %s.", argv[2]);
+        }
     }else if (argc > 4 && strcmp(argv[1], "convert") == 0){
         double value = atof(argv[2]);
         char *fromCurrency = argv[3];
