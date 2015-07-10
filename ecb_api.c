@@ -4,11 +4,18 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <ctype.h>
 #include <sys/stat.h>
 
 #include <libxml/nanohttp.h>
 #include <libxml/xmlreader.h>
 #include <libxml/xpath.h>
+
+void uppercase(char *str){
+    for (int i=0;str[i];i++){
+        str[i] = toupper(str[i]);
+    }
+}
 
 int ecbUpdateDatabase(int maximumAge){
     struct stat databaseStat;
@@ -51,6 +58,7 @@ int ecbGetAllRates(ecbCurrency **currencyArray){
 }
 
 double ecbGetEurRate(char *currencyName){
+    uppercase(currencyName);
     if (strcmp(currencyName, "EUR") == 0){
         return 1;
     }
@@ -59,6 +67,7 @@ double ecbGetEurRate(char *currencyName){
     int currencyCount = ecbGetAllRates(&currencies);
 
     for (int i=0;i<currencyCount;i++){
+        uppercase(currencies[i].name); //The response from the API is already upper-case. This is just to be safe.
         if (strcmp(currencies[i].name, currencyName) == 0){
             double rate = currencies[i].rate;
             free(currencies);
