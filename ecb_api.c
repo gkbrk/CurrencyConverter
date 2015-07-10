@@ -19,9 +19,8 @@ int ecbUpdateDatabase(int maximumAge){
         int status = xmlNanoHTTPFetch("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml", "database.xml", NULL);
         return status;
     }else{
-        printf("No need to update the database.\n");
+        return 0;
     }
-    return 0;
 }
 
 int ecbGetAllRates(ecbCurrency **currencyArray){
