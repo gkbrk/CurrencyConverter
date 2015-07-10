@@ -31,6 +31,14 @@ int main(int argc, char *argv[]){
         double fromEurRate = ecbGetEurRate(fromCurrency);
         double toEurRate = ecbGetEurRate(toCurrency);
 
+        if (fromEurRate == -1){
+            printf("Currency not found: %s.", argv[3]);
+            return 1;
+        }else if (toEurRate == -1){
+            printf("Currency not found: %s.", argv[4]);
+            return 1;
+        }
+
         double converted = value / fromEurRate * toEurRate;
         printf("%.4f %s --> %s: %.4f\n", value, fromCurrency, toCurrency, converted);
     }
