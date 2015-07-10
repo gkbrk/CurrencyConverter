@@ -12,3 +12,4 @@ Currency Converter only needs `libxml2`.
 2. Running `make run` will compile the code and run the executable in one step.
 3. Running `make test` will compile the code and perform memory tests using _valgrind_.
 4. Running `make clean` will remove the executable and only leave the code files.
+5. Running `make install` will install Currency Converter to _usr/local/bin_ and running `make uninstall` will remove it.
