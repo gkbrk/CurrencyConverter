@@ -3,10 +3,18 @@ compile:
 
 run:
 	make compile
-	./currency
+	./currency list
 
 clean:
 	rm -f currency
 
 test:
-	valgrind ./currency
+	make compile
+	valgrind ./currency list
+
+install:
+	make compile
+	cp currency /usr/local/bin/currency
+
+uninstall:
+	rm -f /usr/local/bin/currency
