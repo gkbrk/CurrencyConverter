@@ -12,11 +12,12 @@ int main(int argc, char *argv[]){
         ecbCurrency *currencies;
         int currencyCount = ecbGetAllRates(&currencies);
         for (int i=0;i<currencyCount;i++){
-            printf("%s: %f\n", currencies[i].name, currencies[i].rate);
+            printf("1 EUR --> %.4f %s\n", currencies[i].rate, currencies[i].name);
         }
         free(currencies);
     }else if (argc > 2 && strcmp(argv[1], "get") == 0){
-        printf("1 %s: %.4f EUR\n", argv[2], ecbGetEurRate(argv[2]));
+        printf("1 EUR --> %.4f %s\n", ecbGetEurRate(argv[2]), argv[2]);
+        printf("1 %s --> %.4f EUR\n", argv[2], 1/ecbGetEurRate(argv[2]));
     }else if (argc > 4 && strcmp(argv[1], "convert") == 0){
         double value = atof(argv[2]);
         char *fromCurrency = argv[3];
@@ -26,6 +27,6 @@ int main(int argc, char *argv[]){
         double toEurRate = ecbGetEurRate(toCurrency);
 
         double converted = value / fromEurRate * toEurRate;
-        printf("%.4f %s -> %s: %.4f\n", value, fromCurrency, toCurrency, converted);
+        printf("%.4f %s --> %s: %.4f\n", value, fromCurrency, toCurrency, converted);
     }
 }
